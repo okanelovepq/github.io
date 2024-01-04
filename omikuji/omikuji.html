@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>おみくじ</title>
+  <style>
+    body {
+      text-align: center;
+      padding: 20px;
+      font-family: 'Arial', sans-serif;
+    }
+
+    #titleContainer, #resultImageContainer {
+      position: relative;
+      max-width: 100%;
+      width: 400px; /* 適切な幅に調整してください */
+      margin: 0 auto;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    #drawButton {
+      position: absolute;
+      bottom: 10px; /* 適切な位置に調整してください */
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #resultImageContainer {
+      display: none;
+    }
+
+    #resultImageContainer button {
+      position: absolute;
+      bottom: 10px; /* 適切な位置に調整してください */
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="titleContainer">
+  <img src="title-image.jpg" alt="おみくじのタイトル画像">
+  <button id="drawButton" onclick="drawFortune()">おみくじを引く</button>
+</div>
+
+<div id="resultImageContainer">
+  <img id="resultImage" alt="おみくじの結果画像">
+  <button onclick="drawFortune()">おみくじを引く</button>
+</div>
+
+<script>
+  function drawFortune() {
+    // タイトル画像とボタンを非表示にする
+    document.getElementById('titleContainer').style.display = 'none';
+
+    var fortunes = ['大吉', '中吉', '小吉', '吉', '末吉', '凶', '大凶'];
+    var randomIndex = Math.floor(Math.random() * fortunes.length);
+    var selectedFortune = fortunes[randomIndex];
+    
+    console.log('Selected Fortune:', selectedFortune);
+
+    var imagePath = selectedFortune.toLowerCase() + '-image.jpg';
+
+    console.log('Image Path:', imagePath);
+
+    // デバッグ用：選択された運勢と画像パスをコンソールに表示
+    console.log('Selected Fortune:', selectedFortune);
+    console.log('Image Path:', imagePath);
+
+    // 結果画像とボタンを表示するコンテナを表示
+    var resultImageContainer = document.getElementById('resultImageContainer');
+    resultImageContainer.style.display = 'block';
+
+    // 結果画像を表示
+    var resultImage = document.getElementById('resultImage');
+    resultImage.src = imagePath;
+
+    // デバッグ用：画像読み込み状況をコンソールに表示
+    resultImage.onload = function() {
+      console.log('Image Loaded Successfully!');
+    };
+  }
+</script>
+
+</body>
+</html>
